@@ -1,9 +1,9 @@
-# blue-app-btc
+# blue-app-sky
 Bitcoin wallet application for Ledger Blue and Nano S
 
 This follows the beta specification at https://ledgerhq.github.io/btchip-doc/bitcoin-technical-beta.html - with the regular set of APDUs for standard wallet operations enabled.
 
-Can be tested quickly tested with the Python API at https://github.com/LedgerHQ/btchip-python and Electrum (force noPin = True in getClient in plugins/ledger/ledger.py) 
+Can be tested quickly tested with the Python API at https://github.com/LedgerHQ/btchip-python and Electrum (force noPin = True in getClient in plugins/ledger/ledger.py)
 
 This application is compatible with the Ledger Bitcoin Wallet Chrome Application available on Github at https://github.com/LedgerHQ/blue-app-btc and on Chrome Web Store at https://chrome.google.com/webstore/detail/ledger-wallet-bitcoin/kkdpmhnladdopljabkgpacgpliggeeaf  
 
@@ -13,7 +13,7 @@ The high level communication API provides a set of functions to directly sign tr
 
 To use this API, make sure that "Browser Mode" is activated in the Settings of the Nano S application. This setting is not compatible with the former communication API, and needs to be disabled to use the Ledger Wallet Chrome application
 
-## Usage 
+## Usage
 
 Include the necessary headers (copied from the js/ directory) in your web page
 
@@ -26,7 +26,7 @@ Include the necessary headers (copied from the js/ directory) in your web page
 </head>
 ```
 
-Create a communication object 
+Create a communication object
 
 ```javascript
 var dongle = new LedgerBtc(20);
@@ -40,7 +40,7 @@ var tx1 = dongle.splitTransaction("01000000014ea60aeac5252c14291d428915bd7ccd1bf
 var tx2 = dongle.splitTransaction("...")
 ```
 
-To sign a transaction involving standard (P2PKH) inputs, call createPaymentTransactionNew_async with the folowing parameters 
+To sign a transaction involving standard (P2PKH) inputs, call createPaymentTransactionNew_async with the folowing parameters
 
  - `inputs` is an array of [ transaction, output_index, optional redeem script, optional sequence ] where
    - transaction is the previously computed transaction object for this UTXO
@@ -51,22 +51,22 @@ To sign a transaction involving standard (P2PKH) inputs, call createPaymentTrans
  - `changePath` is an optional BIP 32 path pointing to the path to the public key used to compute the change address
  - `outputScript` is the hexadecimal serialized outputs of the transaction to sign  
  - `lockTime` is the optional lockTime of the transaction to sign, or default (0)
- - `sigHashType` is the hash type of the transaction to sign, or default (all) 
+ - `sigHashType` is the hash type of the transaction to sign, or default (all)
 
-This method returns the signed transaction ready to be broadcast 
+This method returns the signed transaction ready to be broadcast
 
 ```javascript
 dongle.createPaymentTransactionNew_async(
-   [ [tx, 1] ], 
-   ["0'/0/0"], 
-   undefined, 
+   [ [tx, 1] ],
+   ["0'/0/0"],
+   undefined,
    "01905f0100000000001976a91472a5d75c8d2d0565b656a5232703b167d50d5a2b88ac").then(
      function(result) { console.log(result);}).fail(
      function(error) { console.log(error); });
 );
 ```
 
-To obtain the signature of multisignature (P2SH) inputs, call signP2SHTransaction_async with the folowing parameters 
+To obtain the signature of multisignature (P2SH) inputs, call signP2SHTransaction_async with the folowing parameters
 
  - `inputs` is an array of [ transaction, output_index, redeem script, optional sequence ] where
    - transaction is the previously computed transaction object for this UTXO
@@ -76,14 +76,14 @@ To obtain the signature of multisignature (P2SH) inputs, call signP2SHTransactio
  - `associatedKeysets` is an array of BIP 32 paths pointing to the path to the private key used for each UTXO  
  - `outputScript` is the hexadecimal serialized outputs of the transaction to sign  
  - `lockTime` is the optional lockTime of the transaction to sign, or default (0)
- - `sigHashType` is the hash type of the transaction to sign, or default (all) 
+ - `sigHashType` is the hash type of the transaction to sign, or default (all)
 
-This method returns the signed transaction ready to be broadcast 
+This method returns the signed transaction ready to be broadcast
 
 ```javascript
 dongle.signP2SHTransaction_async(
-   [ [tx, 1, "52210289b4a3ad52a919abd2bdd6920d8a6879b1e788c38aa76f0440a6f32a9f1996d02103a3393b1439d1693b063482c04bd40142db97bdf139eedd1b51ffb7070a37eac321030b9a409a1e476b0d5d17b804fcdb81cf30f9b99c6f3ae1178206e08bc500639853ae"] ], 
-   ["0'/0/0"], 
+   [ [tx, 1, "52210289b4a3ad52a919abd2bdd6920d8a6879b1e788c38aa76f0440a6f32a9f1996d02103a3393b1439d1693b063482c04bd40142db97bdf139eedd1b51ffb7070a37eac321030b9a409a1e476b0d5d17b804fcdb81cf30f9b99c6f3ae1178206e08bc500639853ae"] ],
+   ["0'/0/0"],
    "01905f0100000000001976a91472a5d75c8d2d0565b656a5232703b167d50d5a2b88ac").then(
      function(result) { console.log(result);}).fail(
      function(error) { console.log(error); });

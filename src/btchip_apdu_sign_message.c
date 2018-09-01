@@ -22,7 +22,7 @@
 #define P1_PREPARE 0x00
 #define P1_SIGN 0x80
 #define P2_LEGACY 0x00
-#define P2_FIRST 0x01
+#define P2_FIRST 0x00
 #define P2_OTHER 0x80
 
 #define BITID_NONE 0

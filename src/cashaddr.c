@@ -44,7 +44,7 @@ uint64_t PolyMod(uint8_t *prefix, uint8_t *payload, size_t payload_length) {
     size_t i;
     uint64_t c = 1;
     while (*prefix != 0) {
-        c = cashaddr_polymod_step(c) ^ (*prefix++ & b2); // Prefix
+        c = cashaddr_polymod_step(c) ^ (*prefix++); // Prefix
     }
     c = cashaddr_polymod_step(c); // The zero valued separator
     for (i = 0; i < payload_length; ++i) {

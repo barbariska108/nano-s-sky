@@ -27,7 +27,7 @@
 #define P1_DISPLAY 0x01
 
 #define P2_LEGACY 0x04
-#define P2_SEGWIT 0x00
+#define P2_SEGWIT 0x01
 #define P2_NATIVE_SEGWIT 0x02
 #define P2_CASHADDR 0x03
 

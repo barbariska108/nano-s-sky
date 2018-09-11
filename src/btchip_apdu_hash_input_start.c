@@ -18,9 +18,9 @@
 #include "btchip_internal.h"
 #include "btchip_apdu_constants.h"
 
-#define P1_FIRST 0x00
+#define P1_FIRST 0x04
 #define P1_NEXT 0x80
-#define P2_NEW 0x00
+#define P2_NEW 0x04
 #define P2_NEW_SEGWIT 0x02
 #define P2_NEW_SEGWIT_CASHADDR 0x03
 #define P2_CONTINUE 0x80
